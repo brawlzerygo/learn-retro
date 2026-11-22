@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Learn Retro Yu-Gi-Oh!</title>
+<meta name="description" content="Free courses for retro Yu-Gi-Oh! formats. Start with Edison; Goat is coming soon.">
+<!-- Private for now, like the Edison site (2026-11-22): remove this line when the sites go public. -->
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23c2410c'/%3E%3Ctext x='16' y='22.5' font-family='Verdana' font-weight='700' font-size='17' fill='%23fff' text-anchor='middle'%3ELR%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<style>
+/* Learn Retro hub (2026-11-22): the same Board index look as edison.learnretro.com. */
+:root{
+  --bg:#fbfaf7; --surface:#fff; --ink:#1c2128; --muted:#6b665d; --line:#e3e0d8;
+  --accent:#c2410c; --accent-soft:#fff1e6; --sec:#f5f3ee; --label:Verdana, Tahoma, sans-serif;
+  --body:"Atkinson Hyperlegible", Verdana, sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16.5px;line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column}
+.top{border-bottom:1px solid var(--line)}
+.top-in{max-width:960px;margin:0 auto;padding:0 16px;min-height:56px;display:flex;align-items:center}
+.brand{font-size:21px;font-weight:700;color:var(--ink);text-decoration:none}
+.brand em{font-style:normal;color:var(--accent)}
+main{flex:1;max-width:960px;width:100%;margin:0 auto;padding:56px 16px 48px}
+.kicker{font-family:var(--label);font-size:12px;font-weight:bold;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+h1{font-size:clamp(30px,5vw,44px);line-height:1.15;margin:0 0 14px;letter-spacing:-.01em}
+.lead{color:var(--muted);font-size:18px;max-width:620px;margin:0 0 40px}
+.formats{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.fmt{position:relative;display:flex;flex-direction:column;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:24px;color:inherit;text-decoration:none;transition:border-color .15s,box-shadow .15s,transform .15s}
+a.fmt:hover,a.fmt:focus-visible{border-color:var(--accent);box-shadow:0 6px 20px rgba(28,33,40,.08);transform:translateY(-2px);outline:none}
+.fmt h2{font-size:26px;margin:0;line-height:1.2}
+.fmt .era{font-family:var(--label);font-size:12px;font-weight:bold;color:var(--muted)}
+.fmt p{margin:0;color:var(--muted)}
+.fmt .go{margin-top:auto;padding-top:12px;font-weight:700;color:var(--accent)}
+.fmt.soon{background:var(--sec);cursor:default}
+.fmt.soon h2{color:var(--muted)}
+.badge{position:absolute;top:20px;right:20px;font-family:var(--label);font-size:11px;font-weight:bold;padding:3px 8px;border-radius:999px;background:var(--accent-soft);color:var(--accent)}
+.fmt.soon .badge{background:var(--line);color:var(--muted)}
+footer{border-top:1px solid var(--line);color:var(--muted);font-size:13.5px}
+footer div{max-width:960px;margin:0 auto;padding:18px 16px}
+</style>
+</head>
+<body>
+<header class="top"><div class="top-in"><a class="brand" href="/" aria-label="Learn Retro">Learn<em>Retro</em></a></div></header>
+<main>
+  <p class="kicker">Learn Retro Yu-Gi-Oh!</p>
+  <h1>Learn the classic formats, one step at a time.</h1>
+  <p class="lead">Free courses for retro Yu-Gi-Oh! formats: the rules, the cards, the decks and how to think, from your first duel to a tournament deck. Pick a format to start.</p>
+  <div class="formats">
+    <a class="fmt" href="https://edison.learnretro.com/">
+      <span class="badge">Available</span>
+      <h2>Edison</h2>
+      <span class="era">April 2010</span>
+      <p>Synchros, Tuners and the decks of early 5D's.</p>
+      <span class="go">Start learning &rarr;</span>
+    </a>
+    <div class="fmt soon" aria-disabled="true">
+      <span class="badge">Coming soon</span>
+      <h2>Goat</h2>
+      <span class="era">April 2005</span>
+      <p>The classic format, before Synchros.</p>
+      <span class="go" style="color:var(--muted)">Coming soon</span>
+    </div>
+  </div>
+</main>
+<footer><div>Learn Retro is a free fan project. Yu-Gi-Oh! is a trademark of Konami.</div></footer>
+</body>
+</html>
