@@ -41,23 +41,20 @@ a{color:inherit}
 #motes{position:absolute;inset:0;width:100%;height:100%}
 
 .wrap{max-width:1120px;margin:0 auto;padding:0 16px}
-header{padding:18px 0}
+header{padding:14px 0 8px}
 .brand{font-size:22px;font-weight:700;text-decoration:none;letter-spacing:-.01em}
 .brand em{font-style:normal;color:var(--accent)}
 
 /* Hero */
-.hero{text-align:center;padding:48px 0 36px}
-.kicker{display:inline-flex;align-items:center;gap:8px;font-family:var(--label);font-size:11.5px;font-weight:bold;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-2);
-  border:1px solid rgba(245,158,11,.35);border-radius:999px;padding:5px 12px;background:rgba(245,158,11,.08)}
-.kicker i{width:6px;height:6px;border-radius:50%;background:var(--accent-2);box-shadow:0 0 10px var(--accent-2);animation:pulse 2.4s ease-in-out infinite}
-h1{font-size:clamp(34px,6.2vw,64px);line-height:1.05;margin:20px auto 16px;max-width:880px;letter-spacing:-.02em}
+.hero{text-align:center;padding:6px 0 4px}
+h1{font-size:clamp(28px,3.4vw,46px);line-height:1.08;margin:0 auto 8px;max-width:1100px;letter-spacing:-.02em}
 h1 .glow{background:linear-gradient(100deg,#ffd7a8 0%,var(--accent) 45%,#ffb36b 60%,var(--accent) 80%);background-size:220% 100%;
   -webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 6s linear infinite}
-.lead{color:var(--muted);font-size:18.5px;max-width:640px;margin:0 auto}
+.lead{color:var(--muted);font-size:17px;max-width:640px;margin:0 auto}
 
 /* Format panels */
-.formats{display:grid;grid-template-columns:1fr 1fr;gap:24px;padding:28px 0 64px}
-.fmt{position:relative;display:flex;flex-direction:column;border-radius:20px;padding:8px 28px 28px;overflow:hidden;text-decoration:none;isolation:isolate;
+.formats{display:grid;grid-template-columns:1fr 1fr;gap:24px;padding:18px 0 36px}
+.fmt{position:relative;display:flex;flex-direction:column;border-radius:20px;padding:6px 28px 22px;overflow:hidden;text-decoration:none;isolation:isolate;
   background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border:1px solid var(--line);
   transform:perspective(1100px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .25s ease,border-color .25s,box-shadow .25s;
   opacity:0;animation:rise .8s cubic-bezier(.2,.8,.2,1) forwards}
@@ -69,18 +66,18 @@ a.fmt:hover,a.fmt:focus-visible{border-color:rgba(226,96,42,.7);box-shadow:0 24p
 a.fmt:hover::after{opacity:1}
 
 /* The card fan */
-.fan{position:relative;height:330px;margin:0 -8px 10px}
-.card{position:absolute;left:50%;bottom:62px;width:136px;aspect-ratio:421/614;margin-left:-68px;border-radius:7px;overflow:hidden;
+.fan{position:relative;height:222px;margin:0 -8px 4px}
+.card{position:absolute;left:50%;bottom:30px;width:112px;aspect-ratio:421/614;margin-left:-56px;border-radius:7px;overflow:hidden;
   box-shadow:0 18px 30px -10px rgba(0,0,0,.7),0 0 0 1px rgba(0,0,0,.4);transform-origin:50% 120%;
   transform:translateY(40px) rotate(0deg) scale(.9);opacity:0;
   animation:deal .9s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(.35s + var(--i) * .09s);
   transition:transform .45s cubic-bezier(.2,.8,.2,1)}
 .card img{display:block;width:100%;height:100%;object-fit:cover}
-.card:nth-child(1){--i:0;--r:-20deg;--x:-90px;--y:18px;--r2:-24deg;--x2:-112px}
-.card:nth-child(2){--i:1;--r:-10deg;--x:-46px;--y:4px;--r2:-12deg;--x2:-58px}
+.card:nth-child(1){--i:0;--r:-20deg;--x:-74px;--y:18px;--r2:-24deg;--x2:-100px}
+.card:nth-child(2){--i:1;--r:-10deg;--x:-38px;--y:4px;--r2:-12deg;--x2:-52px}
 .card:nth-child(3){--i:2;--r:0deg;--x:0px;--y:0px;--r2:0deg;--x2:0px;z-index:3}
-.card:nth-child(4){--i:3;--r:10deg;--x:46px;--y:4px;--r2:12deg;--x2:58px}
-.card:nth-child(5){--i:4;--r:20deg;--x:90px;--y:18px;--r2:24deg;--x2:112px}
+.card:nth-child(4){--i:3;--r:10deg;--x:38px;--y:4px;--r2:12deg;--x2:52px}
+.card:nth-child(5){--i:4;--r:20deg;--x:74px;--y:18px;--r2:24deg;--x2:100px}
 .card:nth-child(1),.card:nth-child(5){z-index:1}.card:nth-child(2),.card:nth-child(4){z-index:2}
 .fan.ready .card{animation:none;opacity:1;transform:translate(var(--x),var(--y)) rotate(var(--r))}
 a.fmt:hover .fan.ready .card,a.fmt:focus-visible .fan.ready .card{transform:translate(var(--x2),calc(var(--y) - 14px)) rotate(var(--r2))}
@@ -96,24 +93,24 @@ a.fmt:hover .fan.ready .card:nth-child(3){transform:translateY(-22px) scale(1.06
   box-shadow:0 10px 30px rgba(0,0,0,.5);opacity:0;animation:stamp .5s cubic-bezier(.3,1.6,.5,1) 1.3s forwards}
 
 .meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.fmt h2{font-size:36px;line-height:1.1;margin:0;letter-spacing:-.015em}
+.fmt h2{font-size:32px;line-height:1.1;margin:0;letter-spacing:-.015em}
 .chip{font-family:var(--label);font-size:11px;font-weight:bold;letter-spacing:.06em;text-transform:uppercase;border-radius:999px;padding:4px 10px;border:1px solid var(--line);color:var(--muted)}
 .chip.live{color:#ffd8bd;border-color:rgba(226,96,42,.55);background:rgba(226,96,42,.14)}
 .chip.live::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:#4ade80;margin-right:6px;vertical-align:1px;box-shadow:0 0 8px #4ade80}
-.fmt p{margin:10px 0 0;color:var(--muted)}
-.fmt ul{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:8px}
+.fmt p{margin:6px 0 0;color:var(--muted)}
+.fmt ul{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:4px}
 .fmt li{display:flex;gap:10px;align-items:flex-start;color:var(--ink);font-size:15.5px}
 .fmt li::before{content:"";flex:none;width:8px;height:8px;margin-top:8px;border-radius:2px;transform:rotate(45deg);background:var(--accent)}
 .goat li{color:var(--muted)}.goat li::before{background:var(--muted)}
-.go{margin-top:auto;padding-top:22px;display:flex}
-.btn{display:inline-flex;align-items:center;gap:10px;font-weight:700;border-radius:12px;padding:12px 20px}
+.go{margin-top:auto;padding-top:14px;display:flex}
+.btn{display:inline-flex;align-items:center;gap:10px;font-weight:700;border-radius:12px;padding:10px 18px}
 .edison .btn{background:linear-gradient(180deg,#ea6a30,var(--rust));color:#fff;box-shadow:0 8px 20px -8px rgba(226,96,42,.8)}
 .edison .btn span{transition:transform .25s}
 a.fmt:hover .btn span{transform:translateX(4px)}
 .goat .btn{border:1px dashed rgba(246,238,230,.25);color:var(--muted)}
 
 /* Timeline strip */
-.eras{display:flex;align-items:center;justify-content:center;gap:0;margin:0 auto 64px;max-width:640px;font-family:var(--label);font-size:12px;font-weight:bold;color:var(--muted)}
+.eras{display:flex;align-items:center;justify-content:center;gap:0;margin:0 auto 48px;max-width:640px;font-family:var(--label);font-size:12px;font-weight:bold;color:var(--muted)}
 .eras span{white-space:nowrap}
 .eras b{color:var(--ink)}
 .eras .line{flex:1;height:2px;margin:0 14px;background:linear-gradient(90deg,var(--line),var(--accent),var(--line));background-size:200% 100%;animation:flow 4s linear infinite}
@@ -135,8 +132,8 @@ footer p{margin:0 0 6px;max-width:860px}
   .hero{padding:28px 0 16px}
   .fan{height:270px}
   .card{width:112px;margin-left:-56px;bottom:52px}
-  .card:nth-child(1){--x:-82px;--x2:-92px}.card:nth-child(2){--x:-42px;--x2:-48px}
-  .card:nth-child(4){--x:42px;--x2:48px}.card:nth-child(5){--x:82px;--x2:92px}
+  .card:nth-child(1){--x:-74px;--x2:-92px}.card:nth-child(2){--x:-38px;--x2:-48px}
+  .card:nth-child(4){--x:38px;--x2:48px}.card:nth-child(5){--x:74px;--x2:92px}
   .fmt{padding:0 20px 22px}
   .fmt h2{font-size:30px}
 }
@@ -153,8 +150,7 @@ footer p{margin:0 0 6px;max-width:860px}
 <header><div class="wrap"><a class="brand" href="/" aria-label="Learn Retro">Learn<em>Retro</em></a></div></header>
 <main class="wrap">
   <section class="hero">
-    <span class="kicker"><i></i>Learn Retro Yu-Gi-Oh!</span>
-    <h1>Learn the classic formats, <span class="glow">one step at a time.</span></h1>
+    <h1>Learn retro Yu-Gi-Oh! formats, <span class="glow">one step at a time.</span></h1>
     <p class="lead">Free courses for retro Yu-Gi-Oh! formats: the rules, the cards, the decks and how to think, from your first duel to a tournament deck. Pick a format to start.</p>
   </section>
 
@@ -177,7 +173,7 @@ footer p{margin:0 0 6px;max-width:860px}
       <div class="go"><span class="btn">Coming soon</span></div>
     </div>
 
-    <a class="fmt edison" href="https://edison.learnretro.com/">
+    <a class="fmt edison" href="https://edison.learnretro.com/" target="_blank" rel="noopener">
       <div class="fan">
         <div class="card"><img src="img/2009101.webp" alt="Blackwing - Gale the Whirlwind" width="421" height="614"></div>
         <div class="card"><img src="img/73580471.webp" alt="Black Rose Dragon" width="421" height="614"></div>
