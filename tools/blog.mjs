@@ -15,6 +15,51 @@ const SITE = 'https://learnretro.com';
 const drafts = process.argv.includes('--drafts');
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
+// Card art for post headers (Zack, 2026-11-23: "use card art so theyre easier to read/more visually appealing"; picked
+// the header fan + share image). A post's header may list up to 3 cards, `cards: goat/Scapegoat | edison/Black Rose Dragon`:
+// each is looked up by exact name in that format's card data and shown from that format's own art (/edison/img/<id>.webp,
+// /goat/img/<id>.webp), fanned under the title, and composed by ImageMagick into blog/<slug>/og.jpg (1200x630) as the
+// share image. An unknown name stops the build.
+import { execFileSync } from 'child_process';
+const ED = path.resolve(ROOT, '..');
+const CARDS = {};
+for (const [fmt, file, key] of [['edison', path.join(ED, 'data/cards.js'), 'EDISON_CARDS'], ['goat', path.join(ED, 'goat/data/cards.js'), 'GOAT_CARDS']]) {
+  const w = {}; new Function('window', fs.readFileSync(file, 'utf8'))(w);
+  const list = Array.isArray(w[key]) ? w[key] : Object.values(w[key]);
+  CARDS[fmt] = new Map(list.map(c => [c.n, c.id]));
+}
+function postCards(p) {
+  if (!p.cards) return [];
+  return p.cards.split('|').map(x => x.trim()).filter(Boolean).slice(0, 3).map(x => {
+    const k = x.indexOf('/'); const fmt = x.slice(0, k), name = x.slice(k + 1).trim();
+    const id = CARDS[fmt] && CARDS[fmt].get(name);
+    if (!id) throw new Error(`${p.slug}: no ${fmt} card named "${name}"`);
+    const src = path.join(ED, fmt === 'edison' ? 'img' : 'goat/img', `${id}.webp`);
+    if (!fs.existsSync(src)) throw new Error(`${p.slug}: no art for ${name} (${src})`);
+    return { fmt, name, id, url: `/${fmt}/img/${id}.webp`, src };
+  });
+}
+const fanHTML = cs => cs.length ? `<div class="pfan n${cs.length}" aria-hidden="true">${cs.map((c, i) => `<img src="${c.url}" alt="" width="421" height="614" style="--i:${i}" loading="eager">`).join('')}</div>` : '';
+// The share image: the cards fanned on the dark brand background, rebuilt only when the cards change.
+function ogImage(p, cs) {
+  const dir = path.join(ROOT, 'blog', p.slug), out = path.join(dir, 'og.jpg'), stamp = path.join(dir, '.og-cards');
+  const key = cs.map(c => c.fmt + '/' + c.id).join('|');
+  if (!cs.length) return null;
+  if (fs.existsSync(out) && fs.existsSync(stamp) && fs.readFileSync(stamp, 'utf8') === key) return `${SITE}/blog/${p.slug}/og.jpg`;
+  fs.mkdirSync(dir, { recursive: true });
+  const n = cs.length, rot = n === 1 ? [0] : n === 2 ? [-7, 7] : [-10, 0, 10], dx = n === 1 ? [0] : n === 2 ? [-150, 150] : [-270, 0, 270];
+  const args = ['-size', '1200x630', 'radial-gradient:#2a1f18-#16110e'];
+  cs.forEach((c, i) => {
+    const y = n === 3 && i !== 1 ? 30 : 0;
+    args.push('(', c.src, '-resize', 'x500', '(', '+clone', '-background', 'black', '-shadow', '60x14+0+10', ')', '+swap', '-background', 'none', '-layers', 'merge', '+repage',
+      '-rotate', String(rot[i]), ')', '-gravity', 'center', '-geometry', `${dx[i] >= 0 ? '+' : ''}${dx[i]}+${y + 10}`, '-composite');
+  });
+  args.push('-strip', '-quality', '86', out);
+  execFileSync('magick', args);
+  fs.writeFileSync(stamp, key);
+  return `${SITE}/blog/${p.slug}/og.jpg`;
+}
+
 // A small Markdown reader: headings, paragraphs, lists, quotes, images, links, bold and italic.
 function inline(s) {
   return esc(s)
@@ -55,7 +100,7 @@ function readPost(f) {
   return { ...meta, draft: meta.draft === 'true', slug: path.basename(f, '.md'), body: m[2] };
 }
 const fmtDate = d => new Date(d + 'T12:00:00Z').toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
-const shell = ({ title, desc, canonical, body, type = 'website' }) => `<!DOCTYPE html>
+const shell = ({ title, desc, canonical, body, type = 'website', image = null }) => `<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -63,12 +108,12 @@ const shell = ({ title, desc, canonical, body, type = 'website' }) => `<!DOCTYPE
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(desc)}">
 <link rel="canonical" href="${canonical}">
-<meta property="og:type" content="${type}"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:url" content="${canonical}">
+<meta property="og:type" content="${type}"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:url" content="${canonical}">${image ? `\n<meta property="og:image" content="${image}"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="${image}">` : ''}
 <meta name="theme-color" content="#16110e">
 <link rel="icon" href="/img/icon-d2-32.png" type="image/png" sizes="32x32"><link rel="apple-touch-icon" href="/img/icon-d2-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap">
-<link rel="stylesheet" href="/blog/blog.css">
+<link rel="stylesheet" href="/blog/blog.css?v=3">
 <script src="/consent.js" defer></script>
 </head>
 <body>
@@ -94,15 +139,17 @@ for (const d of fs.readdirSync(path.join(ROOT, 'blog'), { withFileTypes: true })
 }
 for (const p of posts) {
   const url = `${SITE}/blog/${p.slug}/`;
+  const cs = postCards(p), image = ogImage(p, cs);
   const body = `<article class="post">
 <p class="crumbs"><a href="/blog/">Blog</a></p>
 <h1>${esc(p.title)}</h1>
 <p class="date"><time datetime="${p.date}">${fmtDate(p.date)}</time>${p.draft ? ' · <b>Draft</b>' : ''}</p>
+${fanHTML(cs)}
 ${md(p.body)}
 </article>
 <script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@type': 'BlogPosting', headline: p.title, description: p.description, datePublished: p.date, url, publisher: { '@type': 'Organization', name: 'Learn Retro Yu-Gi-Oh!' } })}</script>`;
   fs.mkdirSync(path.join(ROOT, 'blog', p.slug), { recursive: true });
-  fs.writeFileSync(path.join(ROOT, 'blog', p.slug, 'index.html'), shell({ title: `${p.title} | Learn Retro`, desc: p.description, canonical: url, body, type: 'article' }));
+  fs.writeFileSync(path.join(ROOT, 'blog', p.slug, 'index.html'), shell({ title: `${p.title} | Learn Retro`, desc: p.description, canonical: url, body, type: 'article', image }));
 }
 const list = posts.length ? `<ul class="posts">${posts.map(p => `<li><a href="/blog/${p.slug}/"><h2>${esc(p.title)}</h2><p>${esc(p.description)}</p><time datetime="${p.date}">${fmtDate(p.date)}</time></a></li>`).join('')}</ul>`
   : '<p class="empty">The first posts are on their way.</p>';
