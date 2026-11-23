@@ -46,8 +46,9 @@ header{padding:16px 0 0;text-align:center}
 /* Hero */
 .hero{text-align:center;padding:24px 0 0}
 h1{font-size:clamp(30px,4.6vw,54px);line-height:1.03;margin:0 auto 8px;max-width:880px;letter-spacing:-.02em}
-h1 .glow{background:linear-gradient(100deg,#ffd7a8 0%,var(--accent) 45%,#ffb36b 60%,var(--accent) 80%);background-size:220% 100%;
-  -webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 6s linear infinite}
+/* The phrase shimmers in place (a soft glow that swells and settles), with no sweeping band (Zack, 2026-11-22). */
+h1 .glow{background:linear-gradient(100deg,#ffd7a8 0%,var(--accent) 45%,#ffb36b 70%,var(--accent) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 3.6s ease-in-out infinite}
 .lead{color:var(--muted);font-size:17px;line-height:1.5;max-width:640px;margin:0 auto}
 
 /* Format panels */
@@ -124,7 +125,7 @@ footer .flinks a:hover{color:var(--accent)}
 @keyframes deal{from{opacity:0;transform:translateY(60px) rotate(0deg) scale(.9)}to{opacity:1;transform:translate(var(--x),var(--y)) rotate(var(--r))}}
 @keyframes sheen{0%,55%{background-position:120% 0}100%{background-position:-60% 0}}
 @keyframes stamp{from{opacity:0;transform:translate(-50%,-50%) rotate(-9deg) scale(1.6)}to{opacity:1;transform:translate(-50%,-50%) rotate(-9deg) scale(1)}}
-@keyframes shine{to{background-position:-220% 0}}
+@keyframes shimmer{0%,100%{filter:brightness(1) drop-shadow(0 0 0 rgba(226,96,42,0))}50%{filter:brightness(1.2) drop-shadow(0 0 14px rgba(226,96,42,.45))}}
 @keyframes pulse{50%{opacity:.35}}
 @keyframes flow{to{background-position:-200% 0}}
 
