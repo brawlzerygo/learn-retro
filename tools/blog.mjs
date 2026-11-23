@@ -63,6 +63,7 @@ const shell = ({ title, desc, canonical, body, type = 'website' }) => `<!DOCTYPE
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap">
 <link rel="stylesheet" href="/blog/blog.css">
+<script src="/consent.js" defer></script>
 </head>
 <body>
 <header><div class="wrap"><a class="brand" href="/"><img class="blogo" src="/img/icon-t1-512.png" alt="" width="32" height="32">Learn<em>Retro</em></a><nav><a href="/">Formats</a><a href="/blog/">Blog</a><a href="/goat/">Goat</a><a href="/edison/">Edison</a><a class="soc" href="https://www.youtube.com/@LearnRetro" target="_blank" rel="noopener" aria-label="Learn Retro on YouTube" title="YouTube"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><rect x="1.5" y="4.5" width="21" height="15" rx="4.5" fill="currentColor"/><path d="M10 8.8v6.4l5.6-3.2z" fill="var(--soc-bg,#fff)"/></svg></a><a class="soc" href="https://www.instagram.com/learnretroygo/" target="_blank" rel="noopener" aria-label="Learn Retro on Instagram" title="Instagram"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg></a></nav></div></header>
@@ -72,7 +73,7 @@ ${body}
 <footer><div class="wrap">
   <p class="socfoot"><a class="soc" href="https://www.youtube.com/@LearnRetro" target="_blank" rel="noopener" aria-label="Learn Retro on YouTube" title="YouTube"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><rect x="1.5" y="4.5" width="21" height="15" rx="4.5" fill="currentColor"/><path d="M10 8.8v6.4l5.6-3.2z" fill="var(--soc-bg,#fff)"/></svg><span>YouTube</span></a><a class="soc" href="https://www.instagram.com/learnretroygo/" target="_blank" rel="noopener" aria-label="Learn Retro on Instagram" title="Instagram"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg><span>Instagram</span></a></p>
   <p>The literal and graphical information presented on this site about Yu-Gi-Oh!, including Card images, Attribute, Level, Rank, Type Symbols, is copyright 4K Media Inc, a subsidiary of Konami Digital Entertainment (KDE), Inc.</p>
-  <p>This website is not produced by, endorsed by, supported by, or affiliated with 4k Media, Studio Dice, or KDE.</p>
+  <p>This website is not produced by, endorsed by, supported by, or affiliated with 4k Media, Studio Dice, or KDE. <a href="/privacy/">Privacy</a></p>
 </div></footer>
 </body>
 </html>
@@ -101,6 +102,21 @@ const list = posts.length ? `<ul class="posts">${posts.map(p => `<li><a href="/b
   : '<p class="empty">The first posts are on their way.</p>';
 fs.writeFileSync(path.join(ROOT, 'blog/index.html'), shell({ title: 'Blog | Learn Retro Yu-Gi-Oh!', desc: 'News and guides for retro Yu-Gi-Oh! formats: big card sales, retro reprints in new sets, and help for Goat and Edison players.', canonical: `${SITE}/blog/`,
   body: `<section class="bloghead"><h1>The Learn Retro blog</h1><p>News and guides for retro Yu-Gi-Oh!: big sales of classic cards, retro reprints in new sets, and help for Goat and Edison players.</p></section>\n${list}` }));
-const urls = [`${SITE}/`, `${SITE}/blog/`, ...posts.filter(p => !p.draft).map(p => `${SITE}/blog/${p.slug}/`)];
+// The privacy page (2026-11-23, with Google Analytics behind the consent banner in /consent.js).
+fs.mkdirSync(path.join(ROOT, 'privacy'), { recursive: true });
+fs.writeFileSync(path.join(ROOT, 'privacy/index.html'), shell({ title: 'Privacy | Learn Retro Yu-Gi-Oh!', desc: 'What Learn Retro collects and how to change your cookie choice.', canonical: `${SITE}/privacy/`,
+  body: `<article class="post">
+<h1>Privacy</h1>
+<p>Learn Retro is a free, fan-made site. There are no accounts, no ads and nothing to buy.</p>
+<h2>Google Analytics</h2>
+<p>If you click Accept on the cookie banner, the site loads Google Analytics, which sets cookies to count visits: which pages are read, roughly where visitors come from, and what device they use. We use it only to see which lessons and tools people use, so we know what to build next. Google processes this data under its own <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">privacy policy</a>. If you click Decline, Google Analytics never loads and nothing is counted.</p>
+<h2>Saved in your browser</h2>
+<p>The site remembers some things in your own browser only, like your cookie choice, your theme, lesson progress and deck lists. They never leave your device, and clearing your browser data removes them.</p>
+<h2>Change your choice</h2>
+<p><button type="button" class="lr-consent-open" onclick="window.lrConsent &amp;&amp; lrConsent.open()">Cookie settings</button></p>
+<h2>Contact</h2>
+<p>Questions: message <a href="https://www.instagram.com/learnretroygo/" target="_blank" rel="noopener">Learn Retro on Instagram</a>.</p>
+</article>` }));
+const urls = [`${SITE}/`, `${SITE}/blog/`, `${SITE}/privacy/`, ...posts.filter(p => !p.draft).map(p => `${SITE}/blog/${p.slug}/`)];
 fs.writeFileSync(path.join(ROOT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(u => `<url><loc>${u}</loc></url>`).join('\n')}\n</urlset>\n`);
 console.log(`Blog: ${posts.length} post(s)${drafts ? ' (drafts included)' : ''}, ${all.filter(p => p.draft).length} draft(s) in all, sitemap.xml with ${urls.length} addresses.`);
