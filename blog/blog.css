@@ -34,6 +34,12 @@ blockquote{margin:0 0 16px;padding:4px 18px;border-left:3px solid var(--accent);
 footer{border-top:1px solid var(--line);color:var(--muted);font-size:13px;line-height:1.5}
 footer .wrap{padding-top:18px;padding-bottom:22px;max-width:1120px}
 footer p{margin:0 0 6px}
+/* Social links (Zack, 2026-11-23) */
+header nav{align-items:center}
+header nav .soc{display:inline-flex;align-items:center;justify-content:center;min-width:40px;min-height:44px;padding:0;--soc-bg:var(--bg)}
+.socfoot{display:flex;gap:4px 18px;flex-wrap:wrap}.socfoot .soc{display:inline-flex;align-items:center;gap:7px;min-height:44px;color:var(--ink);text-decoration:none;font-weight:700;font-size:15px;--soc-bg:var(--bg)}
+.socfoot .soc:hover,header nav .soc:hover{color:var(--accent)}
+@media(max-width:600px){header nav .soc{display:none}}
 /* Phones (2026-11-23): 44 px tap targets in the header, a little less top space. */
 @media(max-width:600px){header .wrap{padding-top:6px;padding-bottom:6px;gap:8px}.brand{font-size:20px}header nav{gap:2px}header nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 7px;font-size:15px}main{padding-top:24px}.crumbs a{display:inline-block;padding:8px 0}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
