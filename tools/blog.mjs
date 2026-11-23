@@ -34,8 +34,14 @@ function md(src) {
       while (i < lines.length && (ol ? /^\s*\d+\.\s+/ : /^\s*[-*]\s+/).test(lines[i])) { items.push(lines[i].replace(/^\s*([-*]|\d+\.)\s+/, '')); i++; }
       out.push(`<${ol ? 'ol' : 'ul'}>${items.map(x => `<li>${inline(x)}</li>`).join('')}</${ol ? 'ol' : 'ul'}>`); continue;
     }
+    if (/^\s*\|/.test(l)) { // a table: header row, a |---| row, then body rows
+      const rows = []; while (i < lines.length && /^\s*\|/.test(lines[i])) { rows.push(lines[i].trim().replace(/^\||\|$/g, '').split('|').map(c => c.trim())); i++; }
+      const body = rows.filter((r, k) => !(k === 1 && r.every(c => /^:?-+:?$/.test(c))));
+      const [head, ...rest] = body;
+      out.push(`<div class="tablewrap"><table><thead><tr>${head.map(c => `<th>${inline(c)}</th>`).join('')}</tr></thead><tbody>${rest.map(r => `<tr>${r.map(c => `<td>${inline(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`); continue;
+    }
     if (l.startsWith('>')) { const q = []; while (i < lines.length && lines[i].startsWith('>')) { q.push(lines[i].replace(/^>\s?/, '')); i++; } out.push(`<blockquote><p>${inline(q.join(' '))}</p></blockquote>`); continue; }
-    const p = []; while (i < lines.length && lines[i].trim() && !/^(#{2,4}\s|>|\s*[-*]\s|\s*\d+\.\s)/.test(lines[i])) { p.push(lines[i].trim()); i++; }
+    const p = []; while (i < lines.length && lines[i].trim() && !/^(#{2,4}\s|>|\s*[-*]\s|\s*\d+\.\s|\s*\|)/.test(lines[i])) { p.push(lines[i].trim()); i++; }
     out.push(`<p>${inline(p.join(' '))}</p>`);
   }
   return out.join('\n');
