@@ -89,7 +89,7 @@ a.fmt:hover .fan.ready .card:nth-child(3){transform:translateY(-22px) scale(1.06
   background-size:300% 100%;background-position:120% 0;animation:sheen 5.5s ease-in-out infinite;animation-delay:calc(1.6s + var(--i) * .18s)}
 /* Goat: faded, waiting */
 .goat .card img{filter:grayscale(.85) sepia(.35) brightness(.72) contrast(.95)}
-.stamp{position:absolute;left:50%;top:40%;z-index:5;transform:translate(-50%,-50%) rotate(-9deg);font-family:var(--label);font-weight:bold;font-size:15px;letter-spacing:.16em;text-transform:uppercase;
+.stamp{white-space:nowrap;position:absolute;left:50%;top:40%;z-index:5;transform:translate(-50%,-50%) rotate(-9deg);font-family:var(--label);font-weight:bold;font-size:15px;letter-spacing:.16em;text-transform:uppercase;
   color:#ffe2c4;border:2px solid rgba(255,226,196,.75);border-radius:8px;padding:8px 16px;background:rgba(22,17,14,.72);backdrop-filter:blur(3px);
   box-shadow:0 10px 30px rgba(0,0,0,.5);opacity:0;animation:stamp .5s cubic-bezier(.3,1.6,.5,1) 1.3s forwards}
 
@@ -140,6 +140,8 @@ footer .flinks a:hover{color:var(--accent)}
   .card:nth-child(4){--x:38px;--x2:48px}.card:nth-child(5){--x:74px;--x2:92px}
   .fmt{padding:0 20px 22px}
   .fmt h2{font-size:30px}
+  .stamp{font-size:13px;letter-spacing:.12em;padding:7px 14px;top:42%}
+  .go .btn{min-height:44px}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
