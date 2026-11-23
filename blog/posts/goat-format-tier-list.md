@@ -1,5 +1,5 @@
 ---
-title: Goat Format Tier List: The Best Decks in Goat
+title: Goat Format Tier List: The Best Yu-Gi-Oh! Decks of 2005
 date: 2026-11-23
 description: The Goat format decks ranked from tier A to E, what the top decks do, and where to find full lists, based on goatformat.com's tier list.
 ---

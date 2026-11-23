@@ -1,5 +1,5 @@
 ---
-title: Edison Format Tier List: Every Deck, Best to Casual
+title: Edison Format Tier List: Every Yu-Gi-Oh! Deck Ranked
 date: 2026-11-23
 description: The Edison format decks ranked in five tiers, from Blackwings and Frogs at the top to casual theme decks, with what the top decks do and a full list for every one.
 ---

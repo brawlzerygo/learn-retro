@@ -1,5 +1,5 @@
 ---
-title: Edison Format Banlist Explained: The March 2010 List
+title: Edison Format Banlist Explained: Yu-Gi-Oh!'s March 2010 List
 date: 2026-11-23
 description: Edison format uses the March 2010 Forbidden and Limited list. Here are the biggest cards on it, what they do, and how it differs from Goat's list.
 ---
