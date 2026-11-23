@@ -59,13 +59,13 @@ const shell = ({ title, desc, canonical, body, type = 'website' }) => `<!DOCTYPE
 <link rel="canonical" href="${canonical}">
 <meta property="og:type" content="${type}"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:url" content="${canonical}">
 <meta name="theme-color" content="#16110e">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23c2410c'/%3E%3Ctext x='16' y='22.5' font-family='Verdana' font-weight='700' font-size='17' fill='%23fff' text-anchor='middle'%3ELR%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="/img/logo-32.png" type="image/png" sizes="32x32"><link rel="apple-touch-icon" href="/img/logo-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap">
 <link rel="stylesheet" href="/blog/blog.css">
 </head>
 <body>
-<header><div class="wrap"><a class="brand" href="/">Learn<em>Retro</em></a><nav><a href="/">Formats</a><a href="/blog/">Blog</a><a href="https://edison.learnretro.com/" target="_blank" rel="noopener">Edison</a></nav></div></header>
+<header><div class="wrap"><a class="brand" href="/"><img class="blogo" src="/img/logo-180.png" alt="" width="32" height="32">Learn<em>Retro</em></a><nav><a href="/">Formats</a><a href="/blog/">Blog</a><a href="https://edison.learnretro.com/" target="_blank" rel="noopener">Edison</a></nav></div></header>
 <main class="wrap">
 ${body}
 </main>
