@@ -2,3 +2,5 @@ User-agent: *
 Allow: /
 
 Sitemap: https://learnretro.com/sitemap.xml
+Sitemap: https://learnretro.com/edison/sitemap.xml
+Sitemap: https://learnretro.com/goat/sitemap.xml

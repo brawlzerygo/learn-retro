@@ -21,9 +21,9 @@ Many players see Edison as a sweet spot between two eras. It is faster and more 
 
 ## How to start playing
 
-- **Learn the game step by step:** our free [Edison course](https://edison.learnretro.com/course/) starts from the basics and goes all the way to tournament decks.
-- **Know the cards:** every Edison-legal card has its own page with its 2010 text, rulings and banlist status, like [Black Rose Dragon](https://edison.learnretro.com/cards/black-rose-dragon/).
-- **Pick a deck:** browse [55 Edison deck lists](https://edison.learnretro.com/decks/) by tier.
+- **Learn the game step by step:** our free [Edison course](/edison/course/) starts from the basics and goes all the way to tournament decks.
+- **Know the cards:** every Edison-legal card has its own page with its 2010 text, rulings and banlist status, like [Black Rose Dragon](/edison/cards/black-rose-dragon/).
+- **Pick a deck:** browse [55 Edison deck lists](/edison/decks/) by tier.
 - **Play online:** DuelingBook and EDOPro are free simulators that support the Edison banlist.
 
 ## Sources
