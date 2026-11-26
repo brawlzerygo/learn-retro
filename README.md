@@ -53,7 +53,6 @@ Credits, with thanks:
 - **Goat tournament deck lists:** [Format Library](https://formatlibrary.com)
 - **Card data and images not covered above, and token images:** [YGOPRODeck](https://ygoprodeck.com)
 - **Card back image:** [Yugipedia](https://yugipedia.com)
-- **Videos in the Edison Library:** their creators, linked on YouTube and credited on the page
 
 Everything is written in our own words. Card data and images are stored on this site, never hotlinked.
 
